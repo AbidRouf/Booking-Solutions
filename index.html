@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -733,7 +732,7 @@
         </div>
     </section>
 
-    <!-- Onboarding Form (UPDATED) -->
+    <!-- Onboarding Form (UPDATED FOR FORMSPREE) -->
     <section id="onboard" class="py-20">
         <div class="max-w-2xl mx-auto px-4">
             <div class="glass-card rounded-2xl p-8 md:p-12 border border-brand-primary/20">
@@ -746,28 +745,28 @@
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-2">Business Name</label>
-                            <input type="text" id="biz-name" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="e.g. London Barbers">
+                            <input type="text" id="biz-name" name="business_name" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="e.g. London Barbers">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-2">Business Email</label>
-                            <input type="email" id="biz-email" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="you@company.com">
+                            <input type="email" id="biz-email" name="email" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="you@company.com">
                         </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-2">Owner Full Name</label>
-                            <input type="text" id="owner-name" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="John Doe">
+                            <input type="text" id="owner-name" name="owner_name" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="John Doe">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-2">Contact Phone</label>
-                            <input type="tel" id="owner-phone" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="+44 7700 900000">
+                            <input type="tel" id="owner-phone" name="phone" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="+44 7700 900000">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Selected Plan</label>
-                        <select id="plan-selector" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition">
+                        <select id="plan-selector" name="plan" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition">
                             <option value="Lite">Lite (£49/mo)</option>
                             <option value="Pro" selected>Pro (£99/mo)</option>
                             <option value="Max">Max (£199/mo) - Recommended</option>
@@ -776,19 +775,19 @@
 
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Industry</label>
-                        <select id="industry-select" onchange="toggleOtherIndustry(this)" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition">
+                        <select id="industry-select" name="industry" onchange="toggleOtherIndustry(this)" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition">
                             <option value="Hair & Beauty">Hair & Beauty</option>
                             <option value="Home Services">Home Services (Plumber, Electrician)</option>
                             <option value="Hospitality">Hospitality</option>
                             <option value="Medical / Dental">Medical / Dental</option>
                             <option value="Other">Other (Please Specify)</option>
                         </select>
-                        <input type="text" id="other-industry-input" class="hidden w-full mt-3 bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-accent outline-none transition" placeholder="Type your industry here...">
+                        <input type="text" id="other-industry-input" name="industry_other" class="hidden w-full mt-3 bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-accent outline-none transition" placeholder="Type your industry here...">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Additional Comments / Questions</label>
-                        <textarea id="comments" rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="Any specific requirements?"></textarea>
+                        <textarea id="comments" name="comments" rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-brand-primary outline-none transition" placeholder="Any specific requirements?"></textarea>
                     </div>
 
                     <div class="flex items-start">
@@ -1132,9 +1131,14 @@
         });
 
 
-        // --- ONBOARDING FORM LOGIC ---
+        // --- ONBOARDING FORM LOGIC (AJAX TO FORMSPREE) ---
         
-        // Mobile Menu
+        // ******************************************************
+        // IMPORTANT: PASTE YOUR FORMSPREE URL HERE
+        const FORMSPREE_ENDPOINT = "https://formspree.io/f/mvgerozp"; 
+        // Example: https://formspree.io/f/mqk....
+        // ******************************************************
+
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
 
@@ -1158,50 +1162,63 @@
             }
         }
 
-        document.getElementById('onboard-form').addEventListener('submit', function(e) {
+        const form = document.getElementById('onboard-form');
+        
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const btn = this.querySelector('button');
-            const originalText = btn.innerText;
+            const submitBtn = this.querySelector('button');
+            const originalText = submitBtn.innerText;
 
-            // Gather Data
-            const bizName = encodeURIComponent(document.getElementById('biz-name').value);
-            const bizEmail = encodeURIComponent(document.getElementById('biz-email').value);
-            const ownerName = encodeURIComponent(document.getElementById('owner-name').value);
-            const ownerPhone = encodeURIComponent(document.getElementById('owner-phone').value);
-            const plan = encodeURIComponent(document.getElementById('plan-selector').value);
-            let industry = document.getElementById('industry-select').value;
-            if (industry === 'Other') {
-                industry = document.getElementById('other-industry-input').value;
+            // Handle "Other" Industry Logic
+            const industrySelect = document.getElementById('industry-select');
+            const otherInput = document.getElementById('other-industry-input');
+            if(industrySelect.value === 'Other') {
+                // Ensure value is set to the text input for submission
+                // Formspree just reads 'name' attributes, so we need to be careful.
+                // We'll append the 'other' value to the industry select value for the payload
+                industrySelect.options[industrySelect.selectedIndex].value = "Other: " + otherInput.value;
             }
-            industry = encodeURIComponent(industry);
-            const comments = encodeURIComponent(document.getElementById('comments').value);
 
             // UI State
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Generating Email...';
-            btn.classList.add('opacity-75', 'cursor-not-allowed');
-            
-            setTimeout(() => {
-                // Construct Mailto Link
-                const subject = `New Configuration: ${decodeURIComponent(bizName)}`;
-                const body = `Hi Booking Solutions Team,%0D%0A%0D%0AI would like to configure my AI Receptionist.%0D%0A%0D%0A--- DETAILS ---%0D%0ABusiness Name: ${bizName}%0D%0AOwner Name: ${ownerName}%0D%0AEmail: ${bizEmail}%0D%0APhone: ${ownerPhone}%0D%0APlan Selected: ${plan}%0D%0AIndustry: ${industry}%0D%0A%0D%0A--- COMMENTS ---%0D%0A${comments}%0D%0A%0D%0APlease contact me to finalize setup.`;
-                
-                // Open Email Client
-                window.location.href = `mailto:abid@booking-solutions.co.uk?subject=${subject}&body=${body}`;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+            submitBtn.disabled = true;
 
-                // Reset Button
-                btn.classList.remove('bg-brand-primary', 'bg-blue-600', 'from-brand-primary', 'to-blue-600');
-                btn.classList.add('bg-green-600');
-                btn.innerHTML = '<i class="fas fa-check mr-2"></i> Email Client Opened';
-                
-                setTimeout(() => {
-                    alert("We have opened your default email client with your details pre-filled. Please hit 'Send' to complete your request!");
-                    btn.innerHTML = originalText;
-                    btn.classList.add('bg-brand-primary'); 
-                    btn.classList.remove('bg-green-600', 'opacity-75', 'cursor-not-allowed');
-                }, 1000);
+            // Send via AJAX
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
 
-            }, 1000);
+                if (response.ok) {
+                    submitBtn.classList.remove('bg-brand-primary', 'bg-blue-600', 'from-brand-primary', 'to-blue-600');
+                    submitBtn.classList.add('bg-green-600');
+                    submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Sent Successfully';
+                    form.reset();
+                    
+                    setTimeout(() => {
+                        alert("Thank you! Your configuration has been sent securely to our team. We will contact you shortly.");
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.classList.add('bg-brand-primary'); 
+                        submitBtn.classList.remove('bg-green-600', 'opacity-75', 'cursor-not-allowed');
+                        submitBtn.disabled = false;
+                    }, 500);
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                console.error("Submission Error:", error);
+                alert("There was a problem sending the form. Please try again or email us directly at abid@booking-solutions.co.uk");
+                submitBtn.innerHTML = originalText;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                submitBtn.disabled = false;
+            }
         });
 
     </script>
